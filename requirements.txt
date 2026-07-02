@@ -8,5 +8,5 @@ sacrebleu==2.6.0
 sacremoses==0.1.1
 sentencepiece==0.2.1
 setuptools==68.2.2
-git+https://github.com/VarunGumma/indic_nlp_library@50a85ff77053868de7bf7fde151d0f90b029e609
+git+https://github.com/VarunGumma/indic_nlp_library@1babb535e69e4fcdbca8abccfa9e7b26cc0a2569
 git+https://github.com/vinodpandey/IndicTransTokenizer@18b7c5b1683355fb5487ff93dbedbca8b56be0cf
