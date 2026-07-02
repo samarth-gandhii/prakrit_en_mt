@@ -21,13 +21,15 @@ def main():
     root = os.path.dirname(os.path.abspath(__file__))
     os.chdir(root)
 
-    os.makedirs("inferences", exist_ok=True)
+    input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
+    ref_file = os.path.join("inferences", f"reference_english_{args.sample_count}.txt")
+
+    os.makedirs(os.path.dirname(os.path.abspath(input_file)), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(ref_file)), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
 
     # hf_path = "hf://datasets/VIITPune/Deshika-Maharashtri_Prakrit_to_English_Parallel_Corpus/prakrit_translation.csv"
     # df = pd.read_csv(hf_path)
-
-    # input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
-    # ref_file = os.path.join("inferences", f"reference_english_{args.sample_count}.txt")
 
     # df["prakrit"].head(args.sample_count).to_csv(input_file, index=False, header=False)
     # df["english"].head(args.sample_count).to_csv(ref_file, index=False, header=False)
@@ -36,9 +38,6 @@ def main():
     print("Fetching and creating clean verification tokens...")
     hf_path = "hf://datasets/VIITPune/Deshika-Maharashtri_Prakrit_to_English_Parallel_Corpus/prakrit_translation.csv"
     df = pd.read_csv(hf_path)
-
-    input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
-    ref_file = os.path.join("inferences", f"reference_english_{args.sample_count}.txt")
 
     # 🔴 FIX: Write files natively line-by-line to prevent pandas comma/quoting pollution (")
     prakrit_lines = df["prakrit"].head(args.sample_count).fillna("").astype(str).tolist()

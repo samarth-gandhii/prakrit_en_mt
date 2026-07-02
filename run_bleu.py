@@ -10,6 +10,9 @@ def main():
     parser.add_argument("--ref", default=os.path.join("inferences", "reference_english_100.txt"))
     args = parser.parse_args()
 
+    root = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(root)
+
     with open(args.ref, encoding="utf-8") as ref_file:
         refs = [ref_file.read().splitlines()]
     with open(args.hyp, encoding="utf-8") as hyp_file:

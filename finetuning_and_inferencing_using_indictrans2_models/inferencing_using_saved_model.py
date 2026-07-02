@@ -62,6 +62,8 @@ def read_lines_from_file(file_path):
 
 def write_lines_to_file(lines, file_path):
     """Write lines to a file."""
+    import os
+    os.makedirs(os.path.dirname(os.path.abspath(file_path)), exist_ok=True)
     with open(file_path, 'w', encoding='utf-8') as file_write:
         file_write.write('\n'.join(lines))
 

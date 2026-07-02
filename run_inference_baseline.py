@@ -22,6 +22,9 @@ def main():
 
     input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
 
+    os.makedirs(os.path.dirname(os.path.abspath(input_file)), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
+
 # 🔴 DECOUPLING FIX: If the input test file doesn't exist, create it natively right here!
     if not os.path.exists(input_file):
         print(f"Input file {input_file} missing. Generating it dynamically from Hugging Face dataset...")
