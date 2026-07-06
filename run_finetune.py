@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--test", default="")
     parser.add_argument("--test-size", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--use-lora", action="store_true", help="Use PEFT/LoRA fine-tuning")
     args = parser.parse_args()
 
     root = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +40,8 @@ def main():
     ]
     if args.test:
         cmd.extend(["--test", args.test])
+    if args.use_lora:
+        cmd.append("--use-lora")
     run(cmd)
 
 
