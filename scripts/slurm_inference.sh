@@ -32,4 +32,4 @@ export HF_TOKEN="your_huggingface_read_token_here"
 
 echo "CUDA Version: $(nvcc --version | grep "release" | awk '{print $6}' | cut -d',' -f1)"
 
-python run_inference.py --sample-count 100 --model-dir models/prakrit_to_english-final --output inferences/prakrit_to_english.txt "$@"
+python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng-final --output inferences/prakrit_to_english.txt "$@"
