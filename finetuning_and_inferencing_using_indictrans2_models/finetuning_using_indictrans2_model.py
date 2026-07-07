@@ -169,19 +169,19 @@ def main():
         indic_indic_ckpt_dir,
         trust_remote_code=True,
     )
-    if args.use_lora:
-        print("Configuring PEFT / LoRA adapter layers...")
-        from peft import LoraConfig, get_peft_model, TaskType
-        peft_config = LoraConfig(
-            task_type=TaskType.SEQ_2_SEQ_LM,
-            inference_mode=False,
-            r=8,
-            lora_alpha=16,
-            lora_dropout=0.05,
-            target_modules=["q_proj", "v_proj", "k_proj", "out_proj"]
-        )
-        indic_indic_model = get_peft_model(indic_indic_model, peft_config)
-        indic_indic_model.print_trainable_parameters()
+    # if args.use_lora:
+    #     print("Configuring PEFT / LoRA adapter layers...")
+    #     from peft import LoraConfig, get_peft_model, TaskType
+    #     peft_config = LoraConfig(
+    #         task_type=TaskType.SEQ_2_SEQ_LM,
+    #         inference_mode=False,
+    #         r=8,
+    #         lora_alpha=16,
+    #         lora_dropout=0.05,
+    #         target_modules=["q_proj", "v_proj", "k_proj", "out_proj"]
+    #     )
+    #     indic_indic_model = get_peft_model(indic_indic_model, peft_config)
+    #     indic_indic_model.print_trainable_parameters()
     # model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
     # create the tokenized dataset
     if not args.tr:

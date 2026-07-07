@@ -14,22 +14,17 @@ PROJECT_ROOT="${SLURM_SUBMIT_DIR}"
 mkdir -p "${PROJECT_ROOT}/logs"
 cd "${PROJECT_ROOT}"
 
-# Load the exact SVNIT modules
-module load anaconda3-2024.2
-module load cuda-12.8
-
-# Activate isolated environment
 source hpc_env/bin/activate
 
-# Handle Hugging Face paths and bypass interactive prompts
-export HF_HUB_DISABLE_SYMLINKS_WARNING="true"
-export HF_HOME="/scratch/$USER/hf_cache"
-mkdir -p "$HF_HOME"
-export WANDB_DISABLED="true"
+# export HF_HUB_DISABLE_SYMLINKS_WARNING="true"
+# export HF_HOME="/scratch/$USER/hf_cache"
+# mkdir -p "$HF_HOME"
+# export WANDB_DISABLED="true"
 
-# Inject Read Token to bypass the gated model check
-export HF_TOKEN="your_huggingface_read_token_here"
+export HF_TOKEN=""
 
-echo "CUDA Version: $(nvcc --version | grep "release" | awk '{print $6}' | cut -d',' -f1)"
+echo "Start Time: $(date)"
 
 python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng-final --output inferences/prakrit_to_english.txt "$@"
+
+echo "End Time: $(date)"

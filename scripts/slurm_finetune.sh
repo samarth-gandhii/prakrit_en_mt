@@ -14,23 +14,18 @@ PROJECT_ROOT="${SLURM_SUBMIT_DIR}"
 mkdir -p "${PROJECT_ROOT}/logs"
 cd "${PROJECT_ROOT}"
 
-# Load the exact SVNIT modules
-module load anaconda3-2024.2
-module load cuda-12.8
-
-# Activate isolated environment
 source hpc_env/bin/activate
 
-# Handle Hugging Face paths and bypass interactive prompts
-export HF_HUB_DISABLE_SYMLINKS_WARNING="true"
-export HF_HOME="/scratch/$USER/hf_cache"
-mkdir -p "$HF_HOME"
-export WANDB_DISABLED="true"
+# export HF_HOME="/home/shrikant/hf_cache"
+# export TRANSFORMERS_CACHE="/home/shrikant/hf_cache"
+# mkdir -p $HF_HOME
 
-# Inject Read Token to bypass the gated model check
-export HF_TOKEN="your_huggingface_read_token_here"
+# cd "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt"
 
-echo "CUDA Version: $(nvcc --version | grep "release" | awk '{print $6}' | cut -d',' -f1)"
+export HF_TOKEN=""
 
-# LoRA is only triggered if explicitly passed (e.g. sbatch scripts/slurm_finetune.sh --use-lora) via "$@"
+echo "Start Time: $(date)"
+
 python run_finetune.py --epoch 5 --model-dir models/prakrit_to_eng --train data/prakrit_eng.clean.tsv "$@"
+
+echo "End Time: $(date)"
