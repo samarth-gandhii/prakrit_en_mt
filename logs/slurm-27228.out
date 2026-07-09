@@ -1,0 +1,35 @@
+=== SLURM Job Diagnostics ===
+Start Time: Wed Jul  8 02:10:32 PM IST 2026
+Host: node1
+SLURM_JOB_ID: 27228
+SLURM_NODELIST: node1
+GPU Status:
+0, NVIDIA H100 NVL, 95830, 91076, 0
+Memory & limits:
+               total        used        free      shared  buff/cache   available
+Mem:           2.2Ti       9.4Gi       2.2Ti       110Mi        15Gi       2.2Ti
+Swap:           59Gi          0B        59Gi
+real-time non-blocking time  (microseconds, -R) unlimited
+core file size              (blocks, -c) 0
+data seg size               (kbytes, -d) unlimited
+scheduling priority                 (-e) 0
+file size                   (blocks, -f) unlimited
+pending signals                     (-i) 9287403
+max locked memory           (kbytes, -l) 66003224
+max memory size             (kbytes, -m) unlimited
+open files                          (-n) 131072
+pipe size                (512 bytes, -p) 8
+POSIX message queues         (bytes, -q) 819200
+real-time priority                  (-r) 0
+stack size                  (kbytes, -s) 8192
+cpu time                   (seconds, -t) unlimited
+max user processes                  (-u) 2062262
+virtual memory              (kbytes, -v) unlimited
+file locks                          (-x) unlimited
+Python version:
+Python 3.11.7
+=== Running Training ===
+Using local base model: /home/shrikant/.cache/huggingface/hub/models--ai4bharat--indictrans2-indic-en-1B/snapshots/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 172
+    log_step(f"Starting finetune.py on device={DEVICE}")
+IndentationError: unexpected indent

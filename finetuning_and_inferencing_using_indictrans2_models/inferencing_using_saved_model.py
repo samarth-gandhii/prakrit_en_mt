@@ -43,7 +43,7 @@ def batch_translate(input_sentences, src_lang, tgt_lang, model, tokenizer, ip):
             )
 
         # Decode the generated tokens into text
-        generated_tokens = tokenizer.batch_decode(generated_tokens.detach().cpu().tolist(), src=False, skip_special_tokens=True)
+        generated_tokens = tokenizer.batch_decode(generated_tokens.detach().cpu().tolist(), skip_special_tokens=True)
 
         # Postprocess the translations, including entity replacement
         translations += ip.postprocess_batch(generated_tokens, lang=tgt_lang)

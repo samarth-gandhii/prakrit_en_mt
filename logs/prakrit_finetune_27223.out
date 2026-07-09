@@ -1,0 +1,23 @@
+Start Time: Wed Jul  8 12:19:45 PM IST 2026
+Using local base model: /home/shrikant/.cache/huggingface/hub/models--ai4bharat--indictrans2-indic-en-1B/snapshots/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a
+[FINETUNE] Starting finetune run on device=cuda
+[FINETUNE] Train file: data/prakrit_eng.clean.tsv
+[FINETUNE] Model output dir: models/prakrit_to_eng
+[FINETUNE] Base model: /home/shrikant/.cache/huggingface/hub/models--ai4bharat--indictrans2-indic-en-1B/snapshots/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a
+[FINETUNE] Loading base model and tokenizer
+[FINETUNE] Base model and tokenizer loaded
+[FINETUNE] Configuring GPU memory-saving options
+[FINETUNE] Reading training data
+[FINETUNE] Loaded 1475 training lines
+[FINETUNE] Splitting training data with test_size=0.1
+[FINETUNE] Train split: 1327 lines, Test split: 148 lines
+[FINETUNE] Creating source/target pairs
+[FINETUNE] Running IndicProcessor preprocessing
+[FINETUNE] Tokenizing datasets
+[FINETUNE] Tokenized train samples: 1327
+[FINETUNE] Tokenized test samples: 148
+[FINETUNE] Building training arguments
+[FINETUNE] Initializing trainer
+[FINETUNE] Starting training loop
+[FINETUNE] ERROR: ValueError: You have to specify either decoder_input_ids or decoder_inputs_embeds
+End Time: Wed Jul  8 12:19:52 PM IST 2026

@@ -1,0 +1,90 @@
+You are using an old version of the checkpointing format that is deprecated (We will also silently ignore `gradient_checkpointing_kwargs` in case you passed it).Please update to the new format on your modeling file. To use the new format, you need to completely remove the definition of the method `_set_gradient_checkpointing` in your model.
+  0%|          | 0/1660 [00:00<?, ?it/s]/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py:1298: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. Starting in PyTorch 2.9, calling checkpoint without use_reentrant will raise an exception. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 275, in main
+    trainer.train()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 1938, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 2279, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 3318, in training_step
+    loss = self.compute_loss(model, inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 3363, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1718, in forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1614, in forward
+    decoder_outputs = self.decoder(
+                      ^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1355, in forward
+    raise ValueError(
+ValueError: You have to specify either decoder_input_ids or decoder_inputs_embeds
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 289, in <module>
+    main()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 275, in main
+    trainer.train()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 1938, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 2279, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 3318, in training_step
+    loss = self.compute_loss(model, inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 3363, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1718, in forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1614, in forward
+    decoder_outputs = self.decoder(
+                      ^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/.cache/huggingface/modules/transformers_modules/ac3daf0ecd37be3b6957764a9179ab2b07fa9d6a/modeling_indictrans.py", line 1355, in forward
+    raise ValueError(
+ValueError: You have to specify either decoder_input_ids or decoder_inputs_embeds
+  0%|          | 0/1660 [00:00<?, ?it/s]

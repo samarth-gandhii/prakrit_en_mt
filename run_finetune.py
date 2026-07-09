@@ -15,10 +15,19 @@ def main():
     parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--model-dir", default=os.path.join("models", "prakrit_to_eng"))
     parser.add_argument("--train", default=os.path.join("data", "prakrit_eng.clean.tsv"))
+    parser.add_argument(
+        "--base-model",
+        default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
+        help="HF model id or local checkpoint path for the base IndicTrans2 model",
+    )
+    parser.add_argument(
+        "--local-files-only",
+        action="store_true",
+        help="Load model/tokenizer only from local files (offline-safe)",
+    )
     parser.add_argument("--test", default="")
     parser.add_argument("--test-size", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--use-lora", action="store_true", help="Use PEFT/LoRA fine-tuning")
     args = parser.parse_args()
 
     root = os.path.dirname(os.path.abspath(__file__))
@@ -29,6 +38,8 @@ def main():
         os.path.join("finetuning_and_inferencing_using_indictrans2_models", "finetuning_using_indictrans2_model.py"),
         "--train",
         args.train,
+        "--base_model",
+        args.base_model,
         "--model",
         args.model_dir,
         "--epoch",
@@ -38,10 +49,10 @@ def main():
         "--seed",
         str(args.seed),
     ]
+    if args.local_files_only:
+        cmd.append("--local-files-only")
     if args.test:
         cmd.extend(["--test", args.test])
-    if args.use_lora:
-        cmd.append("--use-lora")
     run(cmd)
 
 

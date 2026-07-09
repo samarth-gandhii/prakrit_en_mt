@@ -1,5 +1,6 @@
 """Finetuning the indictrans2 model on your dataset."""
 from argparse import ArgumentParser
+import os
 import random
 import torch
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
@@ -26,7 +27,17 @@ def create_source_target_pairs(lines):
     """Create source and target pairs from lines."""
     source_sents, target_sents = [], []
     for line in lines:
-        src, tgt = line.split('\t')[: 2]
+        parts = line.split('\t')
+        if len(parts) < 2:
+            continue
+
+        src, tgt = parts[:2]
+        src_clean = src.strip().strip('"')
+        tgt_clean = tgt.strip().strip('"')
+
+        if src_clean.lower() == 'prakrit' and tgt_clean.lower().startswith('english'):
+            continue
+
         source_sents.append(src)
         target_sents.append(tgt)
     return source_sents, target_sents
@@ -139,6 +150,7 @@ def initialize_model_and_tokenizer(ckpt_dir, direction, quantization):
         trust_remote_code=True,
         low_cpu_mem_usage=True,
         quantization_config=qconfig,
+        local_files_only=True,
     )
 
     if qconfig == None:
@@ -158,32 +170,47 @@ def main():
     parser.add_argument('--test', dest='te', help='Enter the test data in TSV format (optional).')
     parser.add_argument('--test_size', dest='test_size', type=float, default=0.1, help='Test split fraction.')
     parser.add_argument('--seed', dest='seed', type=int, default=42, help='Random seed for split.')
+    parser.add_argument(
+        '--base_model',
+        dest='base_model',
+        default=os.environ.get('BASE_MODEL_PATH', 'ai4bharat/indictrans2-indic-en-1B'),
+        help='HF model id or local path for base model.',
+    )
+
+    print(f"1")
+    parser.add_argument(
+        '--local-files-only',
+        dest='local_files_only',
+        action='store_true',
+        help='Load only local model files (offline mode).',
+    )
+    print(f"2")
+
     parser.add_argument('--model', dest='mod', help='Enter the model directory.')
     parser.add_argument('--epoch', dest='ep', help='Enter the number of epochs.', type=int)
     parser.add_argument('--use-lora', dest='use_lora', action='store_true', help='Use LoRA PEFT')
     args = parser.parse_args()
     quantization = None
-    indic_indic_ckpt_dir = "ai4bharat/indictrans2-indic-en-1B"
+    indic_indic_ckpt_dir = args.base_model
+    print(f"3")
+
     # indic_indic_tokenizer, indic_indic_model = initialize_model_and_tokenizer(indic_indic_ckpt_dir, "indic-indic", quantization)
-    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
-        indic_indic_ckpt_dir,
-        trust_remote_code=True,
-    )
-    # if args.use_lora:
-    #     print("Configuring PEFT / LoRA adapter layers...")
-    #     from peft import LoraConfig, get_peft_model, TaskType
-    #     peft_config = LoraConfig(
-    #         task_type=TaskType.SEQ_2_SEQ_LM,
-    #         inference_mode=False,
-    #         r=8,
-    #         lora_alpha=16,
-    #         lora_dropout=0.05,
-    #         target_modules=["q_proj", "v_proj", "k_proj", "out_proj"]
-    #     )
-    #     indic_indic_model = get_peft_model(indic_indic_model, peft_config)
-    #     indic_indic_model.print_trainable_parameters()
-    # model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
-    # create the tokenized dataset
+    try:
+        indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
+            indic_indic_ckpt_dir,
+            trust_remote_code=True,
+            local_files_only=args.local_files_only,
+        )
+        tokenizer = AutoTokenizer.from_pretrained(
+            indic_indic_ckpt_dir,
+            trust_remote_code=True,
+            local_files_only=args.local_files_only,
+        )
+    except Exception as exc:
+        raise RuntimeError(
+            "Failed to load base model/tokenizer. If the cluster is offline, pass a local path via "
+            "--base_model or BASE_MODEL_PATH and enable --local-files-only."
+        ) from exc
     if not args.tr:
         raise ValueError("Provide --train TSV.")
 
@@ -192,33 +219,35 @@ def main():
         test_dataset = read_lines_from_file(args.te)
     else:
         train_dataset, test_dataset = split_lines(train_dataset, args.test_size, args.seed)
+    print(f"4")
 
     train_source_sents, train_target_sents = create_source_target_pairs(train_dataset)
+    print(f"5")
     test_source_sents, test_target_sents = create_source_target_pairs(test_dataset)
-    tokenizer = AutoTokenizer.from_pretrained(
-        indic_indic_ckpt_dir,
-        trust_remote_code=True,
-    )
+    print(f"6")
     src_lang, tgt_lang = "hin_Deva", "eng_Latn"
     train_source_sents = processor.preprocess_batch(train_source_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=False)
     train_target_sents = processor.preprocess_batch(train_target_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=True)
     test_source_sents = processor.preprocess_batch(test_source_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=False)
     test_target_sents = processor.preprocess_batch(test_target_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=True)
+    print(f"7")
     train_tokenized_dataset = preprocess_function(
         train_source_sents,
         train_target_sents,
         tokenizer,
         indic_indic_model
     )
+    print(f"8")
     test_tokenized_dataset = preprocess_function(
         test_source_sents,
         test_target_sents,
         tokenizer,
         indic_indic_model
     )
+    print(f"9")
     training_args = Seq2SeqTrainingArguments(
         output_dir=args.mod,
-        evaluation_strategy="no",
+        eval_strategy="no",
         learning_rate=1e-5,
         per_device_train_batch_size=4,
         per_device_eval_batch_size=4,
@@ -229,6 +258,7 @@ def main():
         predict_with_generate=False,
         label_smoothing_factor=0.1
     )
+    print(f"10")
     data_collator = DataCollatorForSeq2Seq(
         tokenizer=tokenizer,
         model=indic_indic_model,
@@ -236,6 +266,7 @@ def main():
         pad_to_multiple_of=8,
         label_pad_token_id=-100,
     )
+    print(f"11")
     trainer = Seq2SeqTrainer(
         model=indic_indic_model,
         args=training_args,
@@ -244,15 +275,15 @@ def main():
         tokenizer=tokenizer,
         data_collator=data_collator
     )
-
+    print(f"12")
     trainer.train()
-
+    print(f"13")
     # if the model is to be trained from the latest checkpoint
     # always put epochs > no_of_epochs when training for the 1st time
     # trainer.train(resume_from_checkpoint=True)
     # to predict and return the class/label with the highest score
     indic_indic_model.save_pretrained(args.mod + '-final')
-
+    print(f"14")
 
 if __name__ == '__main__':
     main()

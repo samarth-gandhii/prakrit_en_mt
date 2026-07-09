@@ -1,0 +1,3 @@
+/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/training_args.py:1525: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+slurmstepd: error: *** JOB 27209 ON node1 CANCELLED AT 2026-07-07T13:16:06 ***

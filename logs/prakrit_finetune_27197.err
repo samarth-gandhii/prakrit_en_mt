@@ -1,0 +1,154 @@
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 3ee1593c-dc95-489b-b612-2bc645cd6ad7)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 1s [Retry 1/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 652e7b2c-a3ee-4267-a1a7-291ef7015c8b)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 2s [Retry 2/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 43136f38-93a1-4cac-80ef-8f461e54fb69)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 4s [Retry 3/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: a02638b1-02e8-4ecf-bda8-74b9f2509af1)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 8s [Retry 4/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: eda9b597-69da-4a4b-aadb-cee979fde4b7)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 8s [Retry 5/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: bf264653-1581-4613-820c-a9a4d90da525)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: fa550f1e-c8f2-4489-9fe1-d3a2bac5525b)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+Retrying in 1s [Retry 1/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: a46b5b04-b760-4ba3-baa0-8bb841b8160d)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+Retrying in 2s [Retry 2/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 45e39dcc-9229-41ff-9f4d-4a673869c574)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+Retrying in 4s [Retry 3/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 3d602250-9eb2-45c2-aaab-59674ab0998f)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+Retrying in 8s [Retry 4/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: e05e142e-cfe8-408a-aab8-8ec1716f046a)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+Retrying in 8s [Retry 5/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: ed268685-402e-4f40-9af1-b75d5fc5992a)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/adapter_config.json
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 0cdddbf5-33fe-4912-a3f1-ff6dce6f9992)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 1s [Retry 1/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: d3282b8c-9330-4114-9458-0f11260983df)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 2s [Retry 2/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 9ec93723-0b83-4609-bbe9-3d0792608067)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 4s [Retry 3/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 246de71b-96e3-431c-a719-30c5153e8af2)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 8s [Retry 4/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 5b5c29dc-8a5d-4782-8830-4b66235954d9)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 8s [Retry 5/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 323eb1fa-b303-407b-988a-0408f8317f46)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1106, in _validate_conn
+    conn.connect()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPSConnection(host='huggingface.co', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host='huggingface.co', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1550, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1467, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 306, in _request_wrapper
+    response = http_backoff(method=method, url=url, **params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/utils/_http.py", line 326, in http_backoff
+    raise err
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/utils/_http.py", line 307, in http_backoff
+    response = session.request(method=method, url=url, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/utils/_http.py", line 96, in send
+    return super().send(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: (MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 323eb1fa-b303-407b-988a-0408f8317f46)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/utils/hub.py", line 402, in cached_file
+    resolved_file = hf_hub_download(
+                    ^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1121, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1665, in _raise_on_head_call_error
+    raise LocalEntryNotFoundError(
+huggingface_hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 258, in <module>
+    main()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 168, in main
+    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 524, in from_pretrained
+    config, kwargs = AutoConfig.from_pretrained(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/utils/hub.py", line 445, in cached_file
+    raise EnvironmentError(
+OSError: We couldn't connect to 'https://huggingface.co' to load this file, couldn't find it in the cached files and it looks like ai4bharat/indictrans2-indic-en-1B is not the path to a directory containing a file named config.json.
+Checkout your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.

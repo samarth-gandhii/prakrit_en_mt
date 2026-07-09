@@ -16,7 +16,13 @@ cd "${PROJECT_ROOT}"
 
 source hpc_env/bin/activate
 
-export HF_TOKEN=""
+if [[ -z "${HF_TOKEN:-}" ]]; then
+	if [[ -n "${HF_TOKEN_FILE:-}" && -f "${HF_TOKEN_FILE}" ]]; then
+		export HF_TOKEN="$(tr -d ' \t\r\n' < "${HF_TOKEN_FILE}")"
+	elif [[ -f "$HOME/.config/huggingface/token" ]]; then
+		export HF_TOKEN="$(tr -d ' \t\r\n' < "$HOME/.config/huggingface/token")"
+	fi
+fi
 
 echo "Start Time: $(date)"
 

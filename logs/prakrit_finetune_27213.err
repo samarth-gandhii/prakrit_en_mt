@@ -1,0 +1,5 @@
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 6fc92b42-2091-481a-abe7-83e7fb673837)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 1s [Retry 1/5].
+'(MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json (Caused by NewConnectionError("HTTPSConnection(host=\'huggingface.co\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))'), '(Request ID: 04600a3e-b31e-4e9c-86d6-e7863ca6fc29)')' thrown while requesting HEAD https://huggingface.co/ai4bharat/indictrans2-indic-en-1B/resolve/main/config.json
+Retrying in 2s [Retry 2/5].
+slurmstepd: error: *** JOB 27213 ON node1 CANCELLED AT 2026-07-07T14:40:48 ***

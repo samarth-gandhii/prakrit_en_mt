@@ -1,0 +1,100 @@
+You are using an old version of the checkpointing format that is deprecated (We will also silently ignore `gradient_checkpointing_kwargs` in case you passed it).Please update to the new format on your modeling file. To use the new format, you need to completely remove the definition of the method `_set_gradient_checkpointing` in your model.
+  0%|          | 0/1660 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 762, in convert_to_tensors
+    tensor = as_tensor(value)
+             ^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 724, in as_tensor
+    return torch.tensor(value)
+           ^^^^^^^^^^^^^^^^^^^
+ValueError: expected sequence of length 15 at dim 1 (got 3)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 291, in main
+    trainer.train()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 1938, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 2236, in _inner_training_loop
+    for step, inputs in enumerate(epoch_iterator):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/accelerate/data_loader.py", line 550, in __iter__
+    current_batch = next(dataloader_iter)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 718, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 778, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 57, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer_utils.py", line 814, in __call__
+    return self.data_collator(features)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/data/data_collator.py", line 598, in __call__
+    batch = pad_without_fast_tokenizer_warning(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/data/data_collator.py", line 66, in pad_without_fast_tokenizer_warning
+    padded = tokenizer.pad(*pad_args, **pad_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 3560, in pad
+    return BatchEncoding(batch_outputs, tensor_type=return_tensors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 227, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 778, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`decoder_input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 762, in convert_to_tensors
+    tensor = as_tensor(value)
+             ^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 724, in as_tensor
+    return torch.tensor(value)
+           ^^^^^^^^^^^^^^^^^^^
+ValueError: expected sequence of length 15 at dim 1 (got 3)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 305, in <module>
+    main()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/finetuning_and_inferencing_using_indictrans2_models/finetuning_using_indictrans2_model.py", line 291, in main
+    trainer.train()
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 1938, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer.py", line 2236, in _inner_training_loop
+    for step, inputs in enumerate(epoch_iterator):
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/accelerate/data_loader.py", line 550, in __iter__
+    current_batch = next(dataloader_iter)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 718, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 778, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 57, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/trainer_utils.py", line 814, in __call__
+    return self.data_collator(features)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/data/data_collator.py", line 598, in __call__
+    batch = pad_without_fast_tokenizer_warning(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/data/data_collator.py", line 66, in pad_without_fast_tokenizer_warning
+    padded = tokenizer.pad(*pad_args, **pad_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 3560, in pad
+    return BatchEncoding(batch_outputs, tensor_type=return_tensors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 227, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/hpc_env/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 778, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`decoder_input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+  0%|          | 0/1660 [00:00<?, ?it/s]
