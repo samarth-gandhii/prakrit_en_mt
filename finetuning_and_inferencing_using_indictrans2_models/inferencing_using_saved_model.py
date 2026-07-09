@@ -1,5 +1,6 @@
 """Use IndicTrans2 model for finetuning and inferencing."""
 import torch
+import os
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
 from IndicTransTokenizer import IndicProcessor, IndicTransTokenizer
 from transformers import AutoTokenizer
