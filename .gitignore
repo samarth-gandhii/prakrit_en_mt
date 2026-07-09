@@ -2,6 +2,8 @@ hpc_env/
 
 indictrans2_base_model/
 
+logs/
+
 venv/
 
 .DS_Store

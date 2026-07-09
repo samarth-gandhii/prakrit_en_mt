@@ -1,4 +1,5 @@
 """Use IndicTrans2 model for inferencing."""
+import os
 from argparse import ArgumentParser
 import torch
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
@@ -108,12 +109,17 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('--input', dest='inp', help='Enter the source file path')
     parser.add_argument('--output', dest='out', help='Enter the target file path')
+    parser.add_argument('--base-model', dest='base_model',
+                        default=os.environ.get('BASE_MODEL_PATH', 'ai4bharat/indictrans2-indic-en-1B'),
+                        help='HF model id or local path for base model.')
+    parser.add_argument('--local-files-only', dest='local_files_only', action='store_true',
+                        help='Load only from local files (offline mode).')
     args = parser.parse_args()
-    indic_indic_ckpt_dir = "ai4bharat/indictrans2-indic-en-1B"
+    indic_indic_ckpt_dir = args.base_model
     ip = IndicProcessor(inference=True)
-    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True)
+    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True, local_files_only=args.local_files_only)
     indic_indic_model.to(DEVICE)
-    indic_indic_tokenizer = AutoTokenizer.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True)
+    indic_indic_tokenizer = AutoTokenizer.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True, local_files_only=args.local_files_only)
     hi_sents = read_lines_from_file(args.inp)
     print(len(hi_sents))
     src_lang, tgt_lang = "hin_Deva", "eng_Latn"

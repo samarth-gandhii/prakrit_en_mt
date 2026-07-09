@@ -16,6 +16,11 @@ def main():
     parser.add_argument("--sample-count", type=int, default=100)
     parser.add_argument("--model-dir", default=os.path.join("models", "prakrit_to_eng-final"))
     parser.add_argument("--output", default=os.path.join("inferences", "prakrit_to_eng.txt"))
+    parser.add_argument("--base-model",
+                        default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
+                        help="HF model id or local path for base model (used for tokenizer).")
+    parser.add_argument("--local-files-only", action="store_true",
+                        help="Load only from local files (offline mode).")
     args = parser.parse_args()
 
     root = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +64,11 @@ def main():
         args.model_dir,
         "--output",
         args.output,
+        "--base-model",
+        args.base_model,
     ]
+    if args.local_files_only:
+        cmd.append("--local-files-only")
     run(cmd)
 
     print(f"Input: {input_file}")

@@ -15,6 +15,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample-count", type=int, default=100)
     parser.add_argument("--output", default=os.path.join("inferences", "prakrit_to_eng.baseline.txt"))
+    parser.add_argument("--base-model",
+                        default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
+                        help="HF model id or local path for base model.")
+    parser.add_argument("--local-files-only", action="store_true",
+                        help="Load only from local files (offline mode).")
     args = parser.parse_args()
 
     root = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +42,11 @@ def main():
         input_file,
         "--output",
         args.output,
+        "--base-model",
+        args.base_model,
     ]
+    if args.local_files_only:
+        cmd.append("--local-files-only")
     run(cmd)
 
     print(f"Output: {args.output}")
