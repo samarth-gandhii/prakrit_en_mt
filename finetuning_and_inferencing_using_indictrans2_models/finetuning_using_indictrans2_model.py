@@ -256,7 +256,7 @@ def main():
         save_total_limit=1,
         num_train_epochs=args.ep,
         predict_with_generate=False,
-        label_smoothing_factor=0.1
+        label_smoothing_factor=0.1,
     )
     print(f"10")
     data_collator = DataCollatorForSeq2Seq(

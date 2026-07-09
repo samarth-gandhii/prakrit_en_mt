@@ -25,16 +25,10 @@ def main():
     os.makedirs(os.path.dirname(os.path.abspath(input_file)), exist_ok=True)
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
 
-# 🔴 DECOUPLING FIX: If the input test file doesn't exist, create it natively right here!
+    # Use pre-existing local input file (cluster is offline)
     if not os.path.exists(input_file):
-        print(f"Input file {input_file} missing. Generating it dynamically from Hugging Face dataset...")
-        hf_path = "hf://datasets/VIITPune/Deshika-Maharashtri_Prakrit_to_English_Parallel_Corpus/prakrit_translation.csv"
-        df = pd.read_csv(hf_path)
-        prakrit_lines = df["prakrit"].head(args.sample_count).fillna("").astype(str).tolist()
-        
-        with open(input_file, "w", encoding="utf-8") as f_in:
-            f_write_lines = [line.replace("\n", " ").strip() for line in prakrit_lines]
-            f_in.write("\n".join(f_write_lines) + "\n")
+        print(f"ERROR: Input file {input_file} not found. Generate it locally before submitting.")
+        sys.exit(1)
 
     cmd = [
         sys.executable,

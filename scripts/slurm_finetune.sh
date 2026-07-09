@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:1
+#SBATCH --gres=shard:8
 #SBATCH --mem=32G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=logs/%x_%j.out
