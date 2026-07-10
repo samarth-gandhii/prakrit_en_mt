@@ -2,7 +2,7 @@
 import torch
 import os
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
-from IndicTransTokenizer import IndicProcessor, IndicTransTokenizer
+from IndicTransToolkit import IndicProcessor
 from transformers import AutoTokenizer
 from argparse import ArgumentParser
 
@@ -83,14 +83,7 @@ def main():
     args = parser.parse_args()
     indic_indic_ckpt_dir = args.base_model
     ip = IndicProcessor(inference=True)
-    if os.path.exists(os.path.join(args.mod, "adapter_config.json")):
-        print(f"Detected PEFT/LoRA adapter configuration in {args.mod}. Loading PeftModel wrapper...")
-        from peft import PeftModel
-        base_model = AutoModelForSeq2SeqLM.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True, local_files_only=args.local_files_only)
-        indic_indic_model = PeftModel.from_pretrained(base_model, args.mod)
-    else:
-        print(f"Loading full fine-tuned model checkpoint from {args.mod}...")
-        indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(args.mod, trust_remote_code=True, local_files_only=args.local_files_only)
+    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(args.mod, trust_remote_code=True, local_files_only=args.local_files_only)
     indic_indic_model.to(DEVICE)
     indic_indic_tokenizer = AutoTokenizer.from_pretrained(indic_indic_ckpt_dir, trust_remote_code=True, local_files_only=args.local_files_only)
     hi_sents = read_lines_from_file(args.inp)

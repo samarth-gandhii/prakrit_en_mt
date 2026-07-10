@@ -4,10 +4,9 @@ import os
 import random
 import torch
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
-from IndicTransTokenizer import IndicProcessor, IndicTransTokenizer
+from IndicTransToolkit import IndicProcessor
 from transformers import Seq2SeqTrainer
 from transformers import Seq2SeqTrainingArguments
-from IndicTransTokenizer import IndicDataCollator
 from transformers import AutoTokenizer
 from transformers import DataCollatorForSeq2Seq
 
@@ -127,40 +126,8 @@ def preprocess_function(sources, targets, tokenizer, model):
     ]
 
 
-def initialize_model_and_tokenizer(ckpt_dir, direction, quantization):
-    """Initialize the model and the tokenizer."""
-    if quantization == "4-bit":
-        qconfig = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_compute_dtype=torch.bfloat16,
-        )
-    elif quantization == "8-bit":
-        qconfig = BitsAndBytesConfig(
-            load_in_8bit=True,
-            bnb_8bit_use_double_quant=True,
-            bnb_8bit_compute_dtype=torch.bfloat16,
-        )
-    else:
-        qconfig = None
 
-    tokenizer = IndicTransTokenizer(direction=direction)
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        ckpt_dir,
-        trust_remote_code=True,
-        low_cpu_mem_usage=True,
-        quantization_config=qconfig,
-        local_files_only=True,
-    )
 
-    if qconfig == None:
-        model = model.to(DEVICE)
-        if DEVICE == "cuda":
-            model.half()
-
-    model.eval()
-
-    return tokenizer, model
 
 
 def main():

@@ -3,7 +3,7 @@ import os
 from argparse import ArgumentParser
 import torch
 from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
-from IndicTransTokenizer import IndicProcessor, IndicTransTokenizer
+from IndicTransToolkit import IndicProcessor
 
 
 BATCH_SIZE = 4
@@ -17,38 +17,8 @@ def read_lines_from_file(file_path):
         return [line.strip() for line in file_read.readlines() if line.strip()]
 
 
-def initialize_model_and_tokenizer(ckpt_dir, direction, quantization):
-    if quantization == "4-bit":
-        qconfig = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_compute_dtype=torch.bfloat16,
-        )
-    elif quantization == "8-bit":
-        qconfig = BitsAndBytesConfig(
-            load_in_8bit=True,
-            bnb_8bit_use_double_quant=True,
-            bnb_8bit_compute_dtype=torch.bfloat16,
-        )
-    else:
-        qconfig = None
 
-    tokenizer = IndicTransTokenizer(direction=direction)
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        ckpt_dir,
-        trust_remote_code=True,
-        low_cpu_mem_usage=True,
-        quantization_config=qconfig,
-    )
 
-    if qconfig == None:
-        model = model.to(DEVICE)
-        if DEVICE == "cuda":
-            model.half()
-
-    model.eval()
-
-    return tokenizer, model
 
 
 def batch_translate(input_sentences, src_lang, tgt_lang, model, tokenizer, ip):

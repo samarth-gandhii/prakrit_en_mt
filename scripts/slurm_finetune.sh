@@ -47,10 +47,10 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 	export HF_HUB_OFFLINE="1"
 	export TRANSFORMERS_OFFLINE="1"
 	echo "Using local base model: $BASE_MODEL_PATH"
-	python run_finetune.py --epoch 5 --model-dir models/prakrit_to_eng --train data/prakrit_eng.clean.tsv --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
+	python run_finetune.py --epoch 5 --model-dir models/prakrit_to_eng_v2 --train data/prakrit_eng.clean.tsv --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
 else
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
-	python run_finetune.py --epoch 5 --model-dir models/prakrit_to_eng --train data/prakrit_eng.clean.tsv "$@"
+	python run_finetune.py --epoch 5 --model-dir models/prakrit_to_eng_v2 --train data/prakrit_eng.clean.tsv "$@"
 fi
 
 echo "End Time: $(date)"
