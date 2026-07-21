@@ -20,7 +20,7 @@ from transformers import AutoTokenizer
 from transformers import DataCollatorForSeq2Seq
 
 
-BATCH_SIZE = 4
+BATCH_SIZE = 16
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 processor = IndicProcessor(inference=False)
 

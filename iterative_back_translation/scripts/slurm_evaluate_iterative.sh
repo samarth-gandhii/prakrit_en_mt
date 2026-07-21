@@ -7,11 +7,11 @@
 #SBATCH --gres=shard:16
 #SBATCH --mem=32G
 #SBATCH -t 03-00:00:00
-#SBATCH --output=../logs/%x_%j.out
-#SBATCH --error=../logs/%x_%j.err
+#SBATCH --output=iterative_back_translation/logs/%x_%j.out
+#SBATCH --error=iterative_back_translation/logs/%x_%j.err
 
-PROJECT_ROOT="${SLURM_SUBMIT_DIR}/.."
-REPO_ROOT="${PROJECT_ROOT}/.."
+REPO_ROOT="${SLURM_SUBMIT_DIR}"
+PROJECT_ROOT="${REPO_ROOT}/iterative_back_translation"
 mkdir -p "${PROJECT_ROOT}/logs"
 cd "${REPO_ROOT}"
 

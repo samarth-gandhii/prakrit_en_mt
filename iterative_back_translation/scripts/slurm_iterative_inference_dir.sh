@@ -1,19 +1,6 @@
-#!/bin/bash
-#SBATCH --job-name=ibt_inference
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --nodelist=node2
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:40
-#SBATCH --mem=128G
-#SBATCH -t 03-00:00:00
-#SBATCH --output=iterative_back_translation/logs/%x_%j.out
-#SBATCH --error=iterative_back_translation/logs/%x_%j.err
 
-REPO_ROOT="${SLURM_SUBMIT_DIR}"
+REPO_ROOT="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt"
 PROJECT_ROOT="${REPO_ROOT}/iterative_back_translation"
-mkdir -p "${PROJECT_ROOT}/logs"
 cd "${REPO_ROOT}"
 
 # Force unbuffered Python output so logs appear in real-time

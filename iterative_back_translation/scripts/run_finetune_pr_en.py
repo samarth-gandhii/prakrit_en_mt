@@ -26,7 +26,7 @@ def main():
     parser.add_argument("--train", default=os.path.join("iterative_back_translation", "data", "iteration1_parallel.tsv"))
     parser.add_argument(
         "--base-model",
-        default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
+        default=os.environ.get("BASE_MODEL_PATH", "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/models/prakrit_to_eng_v2-final"),
         help="HF model id or local path for base model (used for TOKENIZER only)",
     )
     parser.add_argument(
