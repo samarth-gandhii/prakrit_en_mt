@@ -41,22 +41,28 @@ if [[ -z "${BASE_MODEL_PATH:-}" ]]; then
 	fi
 fi
 
+# Model weights to continue fine-tuning from
+PRETRAINED_MODEL="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_2-final"
+
 if [[ -d "$BASE_MODEL_PATH" ]]; then
 	export HF_HUB_OFFLINE="1"
 	export TRANSFORMERS_OFFLINE="1"
 	echo "Using local base model: $BASE_MODEL_PATH"
+	echo "Continuing from pretrained weights: $PRETRAINED_MODEL"
 	python iterative_back_translation/scripts/run_finetune_en_pr.py \
 		--epoch 20 \
 		--model-dir iterative_back_translation/models/eng_to_prakrit_iterative \
 		--train iterative_back_translation/data/iteration1_parallel.tsv \
 		--base-model "$BASE_MODEL_PATH" \
+		--pretrained-model "$PRETRAINED_MODEL" \
 		--local-files-only "$@"
 else
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
 	python iterative_back_translation/scripts/run_finetune_en_pr.py \
 		--epoch 20 \
 		--model-dir iterative_back_translation/models/eng_to_prakrit_iterative \
-		--train iterative_back_translation/data/iteration1_parallel.tsv "$@"
+		--train iterative_back_translation/data/iteration1_parallel.tsv \
+		--pretrained-model "$PRETRAINED_MODEL" "$@"
 fi
 
 echo "End Time: $(date)"

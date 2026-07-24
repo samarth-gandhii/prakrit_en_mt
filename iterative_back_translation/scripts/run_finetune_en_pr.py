@@ -1,4 +1,11 @@
-"""Wrapper to fine-tune English→Prakrit using the en-indic base model."""
+"""Wrapper to fine-tune English→Prakrit, continuing from an existing model.
+
+By default, continues fine-tuning from eng_to_prakrit_2-final (model weights)
+while loading the tokenizer from the base indictrans2-en-indic-1B model.
+
+Uses finetuning_en_to_prakrit.py which supports --pretrained_weights for
+loading model and tokenizer from separate paths.
+"""
 import argparse
 import os
 import subprocess
@@ -13,14 +20,19 @@ def run(cmd):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fine-tune English → Prakrit model")
+    parser = argparse.ArgumentParser(description="Fine-tune English → Prakrit model (continued from eng_to_prakrit_2-final)")
     parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--model-dir", default=os.path.join("iterative_back_translation", "models", "eng_to_prakrit_iterative"))
     parser.add_argument("--train", default=os.path.join("iterative_back_translation", "data", "iteration1_parallel.tsv"))
     parser.add_argument(
         "--base-model",
-        default=os.environ.get("BASE_MODEL_PATH", "/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_2-final"),
-        help="HF model id or local checkpoint path for the base IndicTrans2 en-indic model",
+        default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-en-indic-1B"),
+        help="HF model id or local path for base model (used for TOKENIZER only)",
+    )
+    parser.add_argument(
+        "--pretrained-model",
+        default="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_2-final",
+        help="Path to pre-trained model weights to continue fine-tuning from",
     )
     parser.add_argument(
         "--local-files-only",
@@ -43,6 +55,8 @@ def main():
         args.train,
         "--base_model",
         args.base_model,
+        "--pretrained_weights",
+        args.pretrained_model,
         "--model",
         args.model_dir,
         "--epoch",

@@ -5,7 +5,7 @@ This is a modified copy of the original finetuning script with:
   - Column reading swapped: reads column 1 (english) as source, column 0 (prakrit) as target
   - Default base model changed to indictrans2-en-indic-1B
 
-This allows the same iteration<N>_parallel.tsv (prakrit\tenglish) to be used for
+This allows the same iterationN_parallel.tsv (prakrit\\tenglish) to be used for
 BOTH Pr→En and En→Pr training without needing a separate swapped TSV.
 """
 from argparse import ArgumentParser
@@ -139,7 +139,15 @@ def main():
         '--base_model',
         dest='base_model',
         default=os.environ.get('BASE_MODEL_PATH', 'ai4bharat/indictrans2-en-indic-1B'),
-        help='HF model id or local path for base model.',
+        help='HF model id or local path for base model (used for TOKENIZER).',
+    )
+    parser.add_argument(
+        '--pretrained_weights',
+        dest='pretrained_weights',
+        default=None,
+        help='Path to pre-trained model weights to continue fine-tuning from '
+             '(e.g., eng_to_prakrit_2-final). '
+             'If not provided, model is loaded from --base_model.',
     )
 
     print(f"1")
@@ -157,14 +165,21 @@ def main():
     args = parser.parse_args()
     quantization = None
     indic_indic_ckpt_dir = args.base_model
+
+    # Determine where to load model weights from
+    model_load_path = args.pretrained_weights if args.pretrained_weights else indic_indic_ckpt_dir
     print(f"3")
+    print(f"Loading MODEL from: {model_load_path}")
+    print(f"Loading TOKENIZER from: {indic_indic_ckpt_dir}")
 
     try:
+        # Load MODEL from pretrained weights (or base model if not specified)
         indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
-            indic_indic_ckpt_dir,
+            model_load_path,
             trust_remote_code=True,
             local_files_only=args.local_files_only,
         )
+        # ALWAYS load tokenizer from base model (pretrained weights don't include tokenizer)
         tokenizer = AutoTokenizer.from_pretrained(
             indic_indic_ckpt_dir,
             trust_remote_code=True,
@@ -172,8 +187,8 @@ def main():
         )
     except Exception as exc:
         raise RuntimeError(
-            "Failed to load base model/tokenizer. If the cluster is offline, pass a local path via "
-            "--base_model or BASE_MODEL_PATH and enable --local-files-only."
+            "Failed to load model/tokenizer. If the cluster is offline, pass a local path via "
+            "--base_model (for tokenizer) and --pretrained_weights (for model) and enable --local-files-only."
         ) from exc
     if not args.tr:
         raise ValueError("Provide --train TSV.")
