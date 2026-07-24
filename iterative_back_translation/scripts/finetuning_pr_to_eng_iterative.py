@@ -20,7 +20,6 @@ from transformers import AutoTokenizer
 from transformers import DataCollatorForSeq2Seq
 
 
-BATCH_SIZE = 16
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 processor = IndicProcessor(inference=False)
 
@@ -222,8 +221,8 @@ def main():
         output_dir=args.mod,
         eval_strategy="no",
         learning_rate=1e-5,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
+        per_device_train_batch_size=32,
+        per_device_eval_batch_size=32,
         weight_decay=0.01,
         save_strategy='no',
         save_total_limit=1,

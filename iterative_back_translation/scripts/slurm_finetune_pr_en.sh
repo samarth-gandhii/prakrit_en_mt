@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:32
-#SBATCH --mem=32G
+#SBATCH --gres=shard:60
+#SBATCH --mem=64G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
 #SBATCH --error=iterative_back_translation/logs/%x_%j.err
@@ -51,7 +51,7 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 	echo "Using local base model (tokenizer): $BASE_MODEL_PATH"
 	echo "Continuing from pretrained weights: $PRETRAINED_MODEL"
 	python iterative_back_translation/scripts/run_finetune_pr_en.py \
-		--epoch 20 \
+		--epoch 5 \
 		--model-dir iterative_back_translation/models/prakrit_to_eng_iterative \
 		--train iterative_back_translation/data/iteration1_parallel.tsv \
 		--base-model "$BASE_MODEL_PATH" \
@@ -60,7 +60,7 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 else
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
 	python iterative_back_translation/scripts/run_finetune_pr_en.py \
-		--epoch 20 \
+		--epoch 5 \
 		--model-dir iterative_back_translation/models/prakrit_to_eng_iterative \
 		--train iterative_back_translation/data/iteration1_parallel.tsv \
 		--pretrained-model "$PRETRAINED_MODEL" "$@"
