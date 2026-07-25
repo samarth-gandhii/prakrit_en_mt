@@ -37,7 +37,8 @@ if [[ -z "${BASE_MODEL_PATH:-}" ]]; then
 	if [[ -n "$CACHED_SNAPSHOT" && -f "$CACHED_SNAPSHOT/config.json" ]]; then
 		BASE_MODEL_PATH="$CACHED_SNAPSHOT"
 	else
-		BASE_MODEL_PATH="$PWD/indictrans2_en_indic_base_model"
+		# Fall back to the pretrained model dir — it contains the tokenizer too
+		BASE_MODEL_PATH="$PRETRAINED_MODEL"
 	fi
 fi
 
