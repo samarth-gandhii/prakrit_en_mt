@@ -257,6 +257,7 @@ def main():
     trainer.train()
     print(f"13")
     indic_indic_model.save_pretrained(args.mod + '-final')
+    tokenizer.save_pretrained(args.mod + '-final')  # save tokenizer so checkpoint is self-contained
     print(f"14")
 
 if __name__ == '__main__':
