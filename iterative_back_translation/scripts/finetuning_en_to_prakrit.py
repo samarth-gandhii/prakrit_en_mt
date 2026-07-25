@@ -12,7 +12,7 @@ from argparse import ArgumentParser
 import os
 import random
 import torch
-from transformers import AutoModelForSeq2SeqLM, AutoConfig, BitsAndBytesConfig
+from transformers import AutoModelForSeq2SeqLM, BitsAndBytesConfig
 from IndicTransToolkit import IndicProcessor
 from transformers import Seq2SeqTrainer
 from transformers import Seq2SeqTrainingArguments
@@ -168,39 +168,22 @@ def main():
     # Determine where to load model weights from
     model_load_path = args.pretrained_weights if args.pretrained_weights else indic_indic_ckpt_dir
     print(f"3")
-    print(f"Loading MODEL from: {model_load_path}")
+    print(f"Loading MODEL from:     {model_load_path}")
     print(f"Loading TOKENIZER from: {indic_indic_ckpt_dir}")
 
-    try:
-        # Load config + custom module code from the base model directory.
-        # The pretrained weights dir (save_pretrained output) does NOT contain
-        # the custom Python files (configuration_indictrans.py etc.), so we must
-        # always source the config from the base model which has those files.
-        config = AutoConfig.from_pretrained(
-            indic_indic_ckpt_dir,
-            trust_remote_code=True,
-            local_files_only=args.local_files_only,
-        )
-        # Load MODEL weights from pretrained_weights (or base model if not specified),
-        # but use the config loaded above so custom modules resolve correctly.
-        indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
-            model_load_path,
-            config=config,
-            trust_remote_code=True,
-            local_files_only=args.local_files_only,
-        )
-        # ALWAYS load tokenizer from base model (pretrained weights don't include tokenizer)
-        tokenizer = AutoTokenizer.from_pretrained(
-            indic_indic_ckpt_dir,
-            trust_remote_code=True,
-            local_files_only=args.local_files_only,
-        )
-    except Exception as exc:
-        raise RuntimeError(
-            "Failed to load model/tokenizer. If the cluster is offline, pass a local path via "
-            "--base_model (for tokenizer + config) and --pretrained_weights (for model weights) "
-            "and enable --local-files-only."
-        ) from exc
+    # Load model — identical pattern to the working finetuning_pr_to_eng_iterative.py
+    indic_indic_model = AutoModelForSeq2SeqLM.from_pretrained(
+        model_load_path,
+        trust_remote_code=True,
+        local_files_only=args.local_files_only,
+    )
+    # Load tokenizer from the base model (has all custom files + sentencepiece vocab)
+    tokenizer = AutoTokenizer.from_pretrained(
+        indic_indic_ckpt_dir,
+        trust_remote_code=True,
+        local_files_only=args.local_files_only,
+    )
+
     if not args.tr:
         raise ValueError("Provide --train TSV.")
 
