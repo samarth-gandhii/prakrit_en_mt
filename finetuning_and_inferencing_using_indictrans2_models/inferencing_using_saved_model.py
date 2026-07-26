@@ -9,19 +9,18 @@ from transformers import AutoTokenizer
 from argparse import ArgumentParser
 
 
-BATCH_SIZE = 32
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 quantization = None
 
 
-def batch_translate(input_sentences, src_lang, tgt_lang, model, tokenizer, ip):
+def batch_translate(input_sentences, src_lang, tgt_lang, model, tokenizer, ip, batch_size=4):
     translations = []
-    total_batches = (len(input_sentences) + BATCH_SIZE - 1) // BATCH_SIZE
+    total_batches = (len(input_sentences) + batch_size - 1) // batch_size
     start_time = time.time()
-    print(f"Starting translation: {len(input_sentences)} sentences, {total_batches} batches (batch_size={BATCH_SIZE})", flush=True)
+    print(f"Starting translation: {len(input_sentences)} sentences, {total_batches} batches (batch_size={batch_size})", flush=True)
 
-    for batch_idx, i in enumerate(range(0, len(input_sentences), BATCH_SIZE)):
-        batch = input_sentences[i : i + BATCH_SIZE]
+    for batch_idx, i in enumerate(range(0, len(input_sentences), batch_size)):
+        batch = input_sentences[i : i + batch_size]
 
         # Preprocess the batch and extract entity mappings
         batch = ip.preprocess_batch(batch, src_lang=src_lang, tgt_lang=tgt_lang)
@@ -58,14 +57,13 @@ def batch_translate(input_sentences, src_lang, tgt_lang, model, tokenizer, ip):
         del inputs
         torch.cuda.empty_cache()
 
-        # Progress logging every 50 batches
-        if (batch_idx + 1) % 50 == 0 or (batch_idx + 1) == total_batches:
-            elapsed = time.time() - start_time
-            sents_done = min((batch_idx + 1) * BATCH_SIZE, len(input_sentences))
-            sents_per_sec = sents_done / elapsed if elapsed > 0 else 0
-            eta = (len(input_sentences) - sents_done) / sents_per_sec if sents_per_sec > 0 else 0
-            print(f"  Batch {batch_idx+1}/{total_batches} | {sents_done}/{len(input_sentences)} sents | "
-                  f"{sents_per_sec:.1f} sents/sec | ETA: {eta/60:.1f} min", flush=True)
+        # Progress logging every batch
+        elapsed = time.time() - start_time
+        sents_done = min((batch_idx + 1) * batch_size, len(input_sentences))
+        sents_per_sec = sents_done / elapsed if elapsed > 0 else 0
+        eta = (len(input_sentences) - sents_done) / sents_per_sec if sents_per_sec > 0 else 0
+        print(f"  Batch {batch_idx+1}/{total_batches} | {sents_done}/{len(input_sentences)} sents | "
+              f"{sents_per_sec:.1f} sents/sec | ETA: {eta/60:.1f} min", flush=True)
 
     total_time = time.time() - start_time
     print(f"Translation complete: {len(translations)} sentences in {total_time/60:.1f} min", flush=True)
@@ -101,6 +99,8 @@ def main():
                         help='Source language tag (default: hin_Deva for Prakrit→English).')
     parser.add_argument('--tgt-lang', dest='tgt_lang', default='eng_Latn',
                         help='Target language tag (default: eng_Latn for Prakrit→English).')
+    parser.add_argument('--batch-size', dest='batch_size', type=int, default=4,
+                        help='Inference batch size (default: 4, reduce if OOM).')
     args = parser.parse_args()
     indic_indic_ckpt_dir = args.base_model
 
@@ -127,7 +127,8 @@ def main():
 
     src_lang, tgt_lang = args.src_lang, args.tgt_lang
     print(f"Translation direction: {src_lang} → {tgt_lang}", flush=True)
-    or_translations = batch_translate(hi_sents, src_lang, tgt_lang, indic_indic_model, indic_indic_tokenizer, ip)
+    or_translations = batch_translate(hi_sents, src_lang, tgt_lang, indic_indic_model, indic_indic_tokenizer, ip,
+                                      batch_size=args.batch_size)
     write_lines_to_file(or_translations, args.out)
     print(f"Output written to: {args.out}", flush=True)
 

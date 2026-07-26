@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=shard:16
+#SBATCH --gres=shard:40
 #SBATCH --mem=32G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
@@ -83,6 +83,7 @@ else
 		--base-model "$BASE_MODEL_PREN" \
 		--src-lang hin_Deva \
 		--tgt-lang eng_Latn \
+		--batch-size 4 \
 		--local-files-only
 
 	echo ""
@@ -118,6 +119,7 @@ else
 		--base-model "$BASE_MODEL_ENPR" \
 		--src-lang eng_Latn \
 		--tgt-lang hin_Deva \
+		--batch-size 4 \
 		--local-files-only
 
 	echo ""
