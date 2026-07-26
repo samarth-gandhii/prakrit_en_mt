@@ -25,7 +25,7 @@ echo "Start Time: $(date)"
 
 # ---------- Model directories (newly finetuned iterative models) ----------
 PR_EN_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/prakrit_to_eng_iterative-final"
-EN_PR_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/eng_to_prakrit_iterative-final"
+EN_PR_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/eng_to_prakrit_iterative_1epoch-final"
 
 # ---------- Test data paths ----------
 # Prakrit→English

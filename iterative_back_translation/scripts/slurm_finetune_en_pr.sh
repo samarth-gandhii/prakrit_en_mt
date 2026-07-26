@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:60
+#SBATCH --gres=shard:40
 #SBATCH --mem=64G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
@@ -56,8 +56,8 @@ echo "Using local base model (tokenizer): $BASE_MODEL_PATH"
 echo "Continuing from pretrained weights:  $PRETRAINED_MODEL"
 
 python iterative_back_translation/scripts/run_finetune_en_pr.py \
-	--epoch 5 \
-	--model-dir iterative_back_translation/models/eng_to_prakrit_iterative \
+	--epoch 1 \
+	--model-dir iterative_back_translation/models/eng_to_prakrit_iterative_1epoch \
 	--train iterative_back_translation/data/iteration1_parallel.tsv \
 	--base-model "$BASE_MODEL_PATH" \
 	--pretrained-model "$PRETRAINED_MODEL" \
