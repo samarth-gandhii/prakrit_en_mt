@@ -97,6 +97,10 @@ def main():
                         help='HF model id or local path for base model (used for tokenizer).')
     parser.add_argument('--local-files-only', dest='local_files_only', action='store_true',
                         help='Load only from local files (offline mode).')
+    parser.add_argument('--src-lang', dest='src_lang', default='hin_Deva',
+                        help='Source language tag (default: hin_Deva for Prakrit→English).')
+    parser.add_argument('--tgt-lang', dest='tgt_lang', default='eng_Latn',
+                        help='Target language tag (default: eng_Latn for Prakrit→English).')
     args = parser.parse_args()
     indic_indic_ckpt_dir = args.base_model
 
@@ -121,7 +125,8 @@ def main():
     hi_sents = read_lines_from_file(args.inp)
     print(f"Input sentences: {len(hi_sents)}", flush=True)
 
-    src_lang, tgt_lang = "hin_Deva", "eng_Latn"
+    src_lang, tgt_lang = args.src_lang, args.tgt_lang
+    print(f"Translation direction: {src_lang} → {tgt_lang}", flush=True)
     or_translations = batch_translate(hi_sents, src_lang, tgt_lang, indic_indic_model, indic_indic_tokenizer, ip)
     write_lines_to_file(or_translations, args.out)
     print(f"Output written to: {args.out}", flush=True)
