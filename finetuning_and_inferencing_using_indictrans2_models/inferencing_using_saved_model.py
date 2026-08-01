@@ -99,7 +99,7 @@ def main():
                         help='Source language tag (default: hin_Deva for Prakrit→English).')
     parser.add_argument('--tgt-lang', dest='tgt_lang', default='eng_Latn',
                         help='Target language tag (default: eng_Latn for Prakrit→English).')
-    parser.add_argument('--batch-size', dest='batch_size', type=int, default=4,
+    parser.add_argument('--batch-size', dest='batch_size', type=int, default=16,
                         help='Inference batch size (default: 4, reduce if OOM).')
     args = parser.parse_args()
     indic_indic_ckpt_dir = args.base_model
