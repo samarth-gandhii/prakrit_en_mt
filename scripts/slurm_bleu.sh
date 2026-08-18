@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --gres=shard:1
+#SBATCH --gres=shard:4
 #SBATCH --mem=32G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=logs/%x_%j.out
@@ -26,6 +26,6 @@ fi
 
 echo "Start Time: $(date)"
 
-python run_bleu.py --hyp inferences/prakrit_to_english.txt --ref inferences/reference_english_100.txt
+python run_bleu.py --hyp inferences/prakrit_to_english_v5.txt --ref data/100_test_eng.txt
 
 echo "End Time: $(date)"

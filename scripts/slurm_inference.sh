@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=shard:16
-#SBATCH --mem=32G
+#SBATCH --gres=shard:24
+#SBATCH --mem=64G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
@@ -49,10 +49,10 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 	export HF_HUB_OFFLINE="1"
 	export TRANSFORMERS_OFFLINE="1"
 	echo "Using local base model: $BASE_MODEL_PATH"
-	python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng_v2-final --output inferences/prakrit_to_english.txt --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
+	python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng_v5-final --output inferences/prakrit_to_english_v5.txt --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
 else	
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
-	python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng_v2-final --output inferences/prakrit_to_english.txt "$@"
+	python run_inference.py --sample-count 100 --model-dir models/prakrit_to_eng_v5-final --output inferences/prakrit_to_english_v5.txt "$@"
 fi
 
 echo "End Time: $(date)"

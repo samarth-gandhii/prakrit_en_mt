@@ -190,13 +190,9 @@ def main():
 
     train_source_sents, train_target_sents = create_source_target_pairs(train_dataset)
     print(f"5")
-    test_source_sents, test_target_sents = create_source_target_pairs(test_dataset)
-    print(f"6")
     src_lang, tgt_lang = "hin_Deva", "eng_Latn"
     train_source_sents = processor.preprocess_batch(train_source_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=False)
     train_target_sents = processor.preprocess_batch(train_target_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=True)
-    test_source_sents = processor.preprocess_batch(test_source_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=False)
-    test_target_sents = processor.preprocess_batch(test_target_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=True)
     print(f"7")
     train_tokenized_dataset = preprocess_function(
         train_source_sents,
@@ -205,19 +201,25 @@ def main():
         indic_indic_model
     )
     print(f"8")
-    test_tokenized_dataset = preprocess_function(
-        test_source_sents,
-        test_target_sents,
-        tokenizer,
-        indic_indic_model
-    )
+    test_tokenized_dataset = None
+    if test_dataset:
+        test_source_sents, test_target_sents = create_source_target_pairs(test_dataset)
+        print(f"6")
+        test_source_sents = processor.preprocess_batch(test_source_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=False)
+        test_target_sents = processor.preprocess_batch(test_target_sents, src_lang=src_lang, tgt_lang=tgt_lang, is_target=True)
+        test_tokenized_dataset = preprocess_function(
+            test_source_sents,
+            test_target_sents,
+            tokenizer,
+            indic_indic_model
+        )
     print(f"9")
     training_args = Seq2SeqTrainingArguments(
         output_dir=args.mod,
         eval_strategy="no",
         learning_rate=1e-5,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
         weight_decay=0.01,
         save_strategy='no',
         save_total_limit=1,

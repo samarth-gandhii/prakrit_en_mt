@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:32
-#SBATCH --mem=32G
+#SBATCH --gres=shard:48
+#SBATCH --mem=128G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
@@ -47,10 +47,10 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 	export HF_HUB_OFFLINE="1"
 	export TRANSFORMERS_OFFLINE="1"
 	echo "Using local base model: $BASE_MODEL_PATH"
-	python run_finetune.py --epoch 20 --model-dir models/prakrit_to_eng_v2 --train data/prakrit_eng.clean.tsv --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
+	python run_finetune.py --epoch 30 --model-dir models/prakrit_to_eng_v5 --train data/final_train_clean.tsv --test-size 0 --base-model "$BASE_MODEL_PATH" --local-files-only "$@"
 else
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
-	python run_finetune.py --epoch 20 --model-dir models/prakrit_to_eng_v2 --train data/prakrit_eng.clean.tsv "$@"
+	python run_finetune.py --epoch 30 --model-dir models/prakrit_to_eng_v5 --train data/final_train_clean.tsv --test-size 0 "$@"
 fi
 
 echo "End Time: $(date)"

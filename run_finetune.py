@@ -14,7 +14,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--model-dir", default=os.path.join("models", "prakrit_to_eng"))
-    parser.add_argument("--train", default=os.path.join("data", "prakrit_eng.clean.tsv"))
+    parser.add_argument("--train", default=os.path.join("data", "final_train_clean.tsv"))
     parser.add_argument(
         "--base-model",
         default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),

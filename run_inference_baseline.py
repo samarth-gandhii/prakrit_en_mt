@@ -25,7 +25,7 @@ def main():
     root = os.path.dirname(os.path.abspath(__file__))
     os.chdir(root)
 
-    input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
+    input_file = os.path.join("data", f"100_test_pra.txt")
 
     os.makedirs(os.path.dirname(os.path.abspath(input_file)), exist_ok=True)
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)

@@ -6,8 +6,8 @@ import sacrebleu
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--hyp", default=os.path.join("inferences", "prakrit_to_eng.txt"))
-    parser.add_argument("--ref", default=os.path.join("inferences", "reference_english_100.txt"))
+    parser.add_argument("--hyp", default=os.path.join("inferences", "prakrit_to_eng_v4.txt"))
+    parser.add_argument("--ref", default=os.path.join("data", "100_test_eng.txt"))
     args = parser.parse_args()
 
     root = os.path.dirname(os.path.abspath(__file__))

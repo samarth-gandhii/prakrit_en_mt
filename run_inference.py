@@ -14,8 +14,8 @@ def run(cmd):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample-count", type=int, default=100)
-    parser.add_argument("--model-dir", default=os.path.join("models", "prakrit_to_eng-final"))
-    parser.add_argument("--output", default=os.path.join("inferences", "prakrit_to_eng.txt"))
+    parser.add_argument("--model-dir", default=os.path.join("models", "prakrit_to_eng_v4-final"))
+    parser.add_argument("--output", default=os.path.join("inferences", "prakrit_to_english_v4.txt"))
     parser.add_argument("--base-model",
                         default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
                         help="HF model id or local path for base model (used for tokenizer).")
@@ -26,8 +26,8 @@ def main():
     root = os.path.dirname(os.path.abspath(__file__))
     os.chdir(root)
 
-    input_file = os.path.join("inferences", f"input_prakrit_{args.sample_count}.txt")
-    ref_file = os.path.join("inferences", f"reference_english_{args.sample_count}.txt")
+    input_file = os.path.join("data", f"100_test_pra.txt")
+    ref_file = os.path.join("data", f"100_test_eng.txt")
 
     os.makedirs(os.path.dirname(os.path.abspath(input_file)), exist_ok=True)
     os.makedirs(os.path.dirname(os.path.abspath(ref_file)), exist_ok=True)
