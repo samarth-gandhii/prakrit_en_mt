@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=shard:40
-#SBATCH --mem=32G
+#SBATCH --gres=shard:16
+#SBATCH --mem=28G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
 #SBATCH --error=iterative_back_translation/logs/%x_%j.err
@@ -24,19 +24,19 @@ export TRANSFORMERS_OFFLINE="1"
 echo "Start Time: $(date)"
 
 # ---------- Model directories (newly finetuned iterative models) ----------
-PR_EN_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/prakrit_to_eng_iterative-final"
-EN_PR_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/eng_to_prakrit_iterative_20epoch-final"
+PR_EN_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/prakrit_to_eng_v5_iter_3-final"
+EN_PR_MODEL_DIR="${REPO_ROOT}/iterative_back_translation/models/eng_to_prakrit_v5_iter_3-final"
 
 # ---------- Test data paths ----------
 # Prakrit→English
-PR_EN_INPUT="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/inferences/input_prakrit_100.txt"
-PR_EN_REF="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/inferences/reference_english_100.txt"
-PR_EN_HYPO="${REPO_ROOT}/iterative_back_translation/data/eval_prakrit_to_eng_iterative.txt"
+PR_EN_INPUT="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/data/100_test_pra.txt"
+PR_EN_REF="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/data/100_test_eng.txt"
+PR_EN_HYPO="${REPO_ROOT}/iterative_back_translation/data/eval_prakrit_to_eng_iter3v5.txt"
 
 # English→Prakrit
-EN_PR_INPUT="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/inferences/input_english_100.txt"
-EN_PR_REF="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/inferences/reference_prakrit_100.txt"
-EN_PR_HYPO="${REPO_ROOT}/iterative_back_translation/data/eval_eng_to_prakrit_iterative.txt"
+EN_PR_INPUT="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/data/100_test_eng.txt"
+EN_PR_REF="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/data/100_test_pra.txt"
+EN_PR_HYPO="${REPO_ROOT}/iterative_back_translation/data/eval_eng_to_prakrit_iter3v5.txt"
 
 # ---------- Base model tokenizer paths (from HF cache) ----------
 # pr→en tokenizer: indictrans2-indic-en-1B
@@ -83,7 +83,7 @@ else
 		--base-model "$BASE_MODEL_PREN" \
 		--src-lang hin_Deva \
 		--tgt-lang eng_Latn \
-		--batch-size 4 \
+		--batch-size 32 \
 		--local-files-only
 
 	echo ""
@@ -119,7 +119,7 @@ else
 		--base-model "$BASE_MODEL_ENPR" \
 		--src-lang eng_Latn \
 		--tgt-lang hin_Deva \
-		--batch-size 4 \
+		--batch-size 32 \
 		--local-files-only
 
 	echo ""

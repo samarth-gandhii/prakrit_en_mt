@@ -30,12 +30,19 @@ def create_source_target_pairs(lines):
         if len(parts) < 2:
             continue
 
-        src, tgt = parts[:2]
-        src_clean = src.strip().strip('"')
-        tgt_clean = tgt.strip().strip('"')
+        p1, p2 = parts[0].strip(), parts[1].strip()
+        p1_clean = p1.strip('"').strip("'").strip("“").strip("”").strip()
+        p2_clean = p2.strip('"').strip("'").strip("“").strip("”").strip()
 
-        if src_clean.lower() == 'prakrit' and tgt_clean.lower().startswith('english'):
+        # Skip header
+        if p1_clean.lower() in ("prakrit", "english") and p2_clean.lower() in ("prakrit", "english"):
             continue
+
+        # For Prakrit -> English: Source MUST be Prakrit (Devanagari) and Target MUST be English
+        if any('\u0900' <= c <= '\u097F' for c in p1_clean):
+            src, tgt = p1_clean, p2_clean
+        else:
+            src, tgt = p2_clean, p1_clean
 
         source_sents.append(src)
         target_sents.append(tgt)

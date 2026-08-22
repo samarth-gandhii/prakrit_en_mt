@@ -1,6 +1,6 @@
 """Wrapper to fine-tune Prakrit→English, continuing from an existing model.
 
-By default, continues fine-tuning from models/prakrit_to_eng_v2-final (model weights)
+By default, continues fine-tuning from models/prakrit_to_eng_v5-final (model weights)
 while loading the tokenizer from the base indictrans2-indic-en-1B model.
 
 Uses finetuning_pr_to_eng_iterative.py which supports --pretrained_weights for
@@ -20,18 +20,18 @@ def run(cmd):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fine-tune Prakrit → English model (continued from v2-final)")
+    parser = argparse.ArgumentParser(description="Fine-tune Prakrit → English model (continued from v5-final)")
     parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--model-dir", default=os.path.join("iterative_back_translation", "models", "prakrit_to_eng_iterative"))
     parser.add_argument("--train", default=os.path.join("iterative_back_translation", "data", "iteration1_parallel.tsv"))
     parser.add_argument(
         "--base-model",
-        default=os.environ.get("BASE_MODEL_PATH", "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/models/prakrit_to_eng_v2-final"),
+        default=os.environ.get("BASE_MODEL_PATH", "/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/models/prakrit_to_eng_v5-final"),
         help="HF model id or local path for base model (used for TOKENIZER only)",
     )
     parser.add_argument(
         "--pretrained-model",
-        default=os.path.join("models", "prakrit_to_eng_v2-final"),
+        default=os.path.join("models", "prakrit_to_eng_v5-final"),
         help="Path to pre-trained model weights to continue fine-tuning from",
     )
     parser.add_argument(

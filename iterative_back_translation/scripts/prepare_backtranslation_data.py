@@ -34,18 +34,12 @@ def main():
         print(f"ERROR: Line count mismatch! Prakrit: {len(prakrit_lines)}, English: {len(english_lines)}")
         sys.exit(1)
 
-    with open(output_file, 'w', encoding='utf-8', newline='') as f_out:
-        writer = csv.writer(f_out, delimiter='\t')
-        # Even though we are training English to Prakrit, we can keep the columns consistent with other scripts
-        # or change them depending on how the finetune script reads them.
-        # It's usually safe to output 'english' and 'prakrit' columns.
-        writer.writerow(['english', 'prakrit'])
-        
+    with open(output_file, 'w', encoding='utf-8') as f_out:
+        f_out.write("prakrit\tenglish\n")
         for en, pr in zip(english_lines, prakrit_lines):
-            # Clean up quotes if present from generation/extraction
-            en = en.strip('"')
-            pr = pr.strip('"')
-            writer.writerow([en, pr])
+            en_clean = en.strip().strip('"').strip("'").strip("“").strip("”").strip()
+            pr_clean = pr.strip().strip('"').strip("'").strip("“").strip("”").strip()
+            f_out.write(f"{pr_clean}\t{en_clean}\n")
 
     print(f"Successfully wrote {len(prakrit_lines)} pairs to {output_file}")
 

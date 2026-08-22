@@ -25,6 +25,10 @@ def main():
     parser.add_argument("--base-model",
                         default=os.environ.get("BASE_MODEL_PATH", "ai4bharat/indictrans2-indic-en-1B"),
                         help="HF model id or local path for base model (used for tokenizer).")
+    parser.add_argument("--direction", choices=["pra2eng", "eng2pra"], default="pra2eng",
+                        help="Translation direction: pra2eng (default) or eng2pra")
+    parser.add_argument("--batch-size", type=int, default=64,
+                        help="Batch size for model inference (default: 64)")
     parser.add_argument("--local-files-only", action="store_true",
                         help="Load only from local files (offline mode).")
     args = parser.parse_args()
@@ -33,8 +37,7 @@ def main():
     output_tsv = os.path.abspath(args.output)
     model_dir = os.path.abspath(args.model_dir)
 
-    # Raw English output goes alongside the TSV
-    english_raw = output_tsv.replace(".tsv", "_english_raw.txt")
+    raw_output = output_tsv.replace(".tsv", "_raw_output.txt")
 
     os.makedirs(os.path.dirname(output_tsv), exist_ok=True)
 
@@ -53,39 +56,50 @@ def main():
         "inferencing_using_saved_model.py",
     )
 
+    src_lang = "hin_Deva" if args.direction == "pra2eng" else "eng_Latn"
+    tgt_lang = "eng_Latn" if args.direction == "pra2eng" else "hin_Deva"
+
     cmd = [
         sys.executable,
         inference_script,
         "--input", input_file,
         "--model", model_dir,
-        "--output", english_raw,
+        "--output", raw_output,
         "--base-model", args.base_model,
+        "--src-lang", src_lang,
+        "--tgt-lang", tgt_lang,
+        "--batch-size", str(args.batch_size),
     ]
     if args.local_files_only:
         cmd.append("--local-files-only")
     run(cmd)
 
-    # ---------- Step 2: Create parallel corpus TSV ----------
+    # ---------- Step 2: Create parallel corpus TSV (Col 0 = Prakrit, Col 1 = English) ----------
     print("\nCreating parallel corpus TSV...")
     with open(input_file, "r", encoding="utf-8") as f:
-        prakrit_lines = [line.strip() for line in f if line.strip()]
-    with open(english_raw, "r", encoding="utf-8") as f:
-        english_lines = [line.strip() for line in f if line.strip()]
+        input_lines = [line.strip() for line in f if line.strip()]
+    with open(raw_output, "r", encoding="utf-8") as f:
+        gen_lines = [line.strip() for line in f if line.strip()]
 
-    if len(prakrit_lines) != len(english_lines):
-        print(f"WARNING: Line count mismatch! Prakrit: {len(prakrit_lines)}, English: {len(english_lines)}")
-        min_len = min(len(prakrit_lines), len(english_lines))
-        prakrit_lines = prakrit_lines[:min_len]
-        english_lines = english_lines[:min_len]
+    if len(input_lines) != len(gen_lines):
+        print(f"WARNING: Line count mismatch! Input: {len(input_lines)}, Output: {len(gen_lines)}")
+        min_len = min(len(input_lines), len(gen_lines))
+        input_lines = input_lines[:min_len]
+        gen_lines = gen_lines[:min_len]
 
-    with open(output_tsv, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter="\t")
-        writer.writerow(["prakrit", "english"])
-        for pr, en in zip(prakrit_lines, english_lines):
-            writer.writerow([pr, en])
+    with open(output_tsv, "w", encoding="utf-8") as f:
+        f.write("prakrit\tenglish\n")
+        for inp, gen in zip(input_lines, gen_lines):
+            inp_clean = inp.strip().strip('"').strip("'").strip("“").strip("”").strip()
+            gen_clean = gen.strip().strip('"').strip("'").strip("“").strip("”").strip()
+            if args.direction == "pra2eng":
+                pr, en = inp_clean, gen_clean
+            else:
+                pr, en = gen_clean, inp_clean
+            f.write(f"{pr}\t{en}\n")
 
-    print(f"Parallel corpus saved: {output_tsv} ({len(prakrit_lines)} pairs)")
-    print(f"Raw English output kept at: {english_raw}")
+    print(f"Parallel corpus saved: {output_tsv} ({len(input_lines)} pairs)")
+    print(f"Raw model output kept at: {raw_output}")
 
 
 if __name__ == "__main__":

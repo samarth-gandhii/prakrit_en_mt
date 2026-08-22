@@ -5,8 +5,8 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --gres=shard:60
-#SBATCH --mem=64G
-#SBATCH -t 03-00:00:00
+#SBATCH --mem=128G
+#SBATCH -t 24:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
 #SBATCH --error=iterative_back_translation/logs/%x_%j.err
 
@@ -28,7 +28,7 @@ fi
 echo "Start Time: $(date)"
 
 # Model weights to continue fine-tuning from (define FIRST, used in fallback below)
-PRETRAINED_MODEL="models/prakrit_to_eng_v2-final"
+PRETRAINED_MODEL="/home/shrikant/2026/Summer Internship/Samarth/prakrit_en_mt/iterative_back_translation/models/prakrit_to_eng_v5_iter_2-final"
 
 # Force offline mode — never attempt HuggingFace network calls
 export HF_HUB_OFFLINE="1"
@@ -66,9 +66,9 @@ echo "Using local base model (tokenizer): $BASE_MODEL_PATH"
 echo "Continuing from pretrained weights:  $PRETRAINED_MODEL"
 
 python iterative_back_translation/scripts/run_finetune_pr_en.py \
-	--epoch 5 \
-	--model-dir iterative_back_translation/models/prakrit_to_eng_iterative \
-	--train iterative_back_translation/data/iteration1_parallel.tsv \
+	--epoch 30 \
+	--model-dir iterative_back_translation/models/prakrit_to_eng_v5_iter_3 \
+	--train iterative_back_translation/data/iter1-v5_eng_set3_to_pra_parallel.tsv \
 	--base-model "$BASE_MODEL_PATH" \
 	--pretrained-model "$PRETRAINED_MODEL" \
 	--local-files-only "$@"

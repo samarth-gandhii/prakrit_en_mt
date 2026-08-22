@@ -4,9 +4,9 @@
 #SBATCH --nodes=1
 #SBATCH --nodelist=node2
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --gres=shard:40
-#SBATCH --mem=128G
+#SBATCH --cpus-per-task=8
+#SBATCH --gres=shard:20
+#SBATCH --mem=32G
 #SBATCH -t 03-00:00:00
 #SBATCH --output=iterative_back_translation/logs/%x_%j.out
 #SBATCH --error=iterative_back_translation/logs/%x_%j.err
@@ -39,9 +39,9 @@ echo "Start Time: $(date)"
 echo "Working Dir: $(pwd)"
 
 # ---- Configurable per iteration ----
-INPUT_FILE="iterative_back_translation/data/eng_dataset_1.txt"
-OUTPUT_TSV="iterative_back_translation/data/iter1_eng(set1)_to_pra_parallel.tsv"
-MODEL_DIR="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_2-final"
+INPUT_FILE="iterative_back_translation/data/eng_dataset_3.txt"
+OUTPUT_TSV="iterative_back_translation/data/iter1-v5_eng(set3)_to_pra_parallel.tsv"
+MODEL_DIR="iterative_back_translation/models/eng_to_prakrit_v5_iter_2-final"
 # -------------------------------------
 
 # Base model: indictrans2-en-indic-1B (En→Pr direction)
@@ -68,13 +68,17 @@ if [[ -d "$BASE_MODEL_PATH" ]]; then
 		--output "$OUTPUT_TSV" \
 		--model-dir "$MODEL_DIR" \
 		--base-model "$BASE_MODEL_PATH" \
+		--direction eng2pra \
+		--batch-size 64 \
 		--local-files-only "$@"
 else
 	echo "WARN: Local base model not found at $BASE_MODEL_PATH; attempting online download."
 	python iterative_back_translation/scripts/run_inference_iterative.py \
 		--input "$INPUT_FILE" \
 		--output "$OUTPUT_TSV" \
-		--model-dir "$MODEL_DIR" "$@"
+		--model-dir "$MODEL_DIR" \
+		--direction eng2pra \
+		--batch-size 64 "$@"
 fi
 
 echo "End Time: $(date)"

@@ -1,6 +1,6 @@
 """Wrapper to fine-tune English→Prakrit, continuing from an existing model.
 
-By default, continues fine-tuning from eng_to_prakrit_2-final (model weights)
+By default, continues fine-tuning from eng_to_prakrit_v5-final (model weights)
 while loading the tokenizer from the base indictrans2-en-indic-1B model.
 
 Uses finetuning_en_to_prakrit.py which supports --pretrained_weights for
@@ -20,7 +20,7 @@ def run(cmd):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fine-tune English → Prakrit model (continued from eng_to_prakrit_2-final)")
+    parser = argparse.ArgumentParser(description="Fine-tune English → Prakrit model (continued from eng_to_prakrit_v5-final)")
     parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--model-dir", default=os.path.join("iterative_back_translation", "models", "eng_to_prakrit_iterative"))
     parser.add_argument("--train", default=os.path.join("iterative_back_translation", "data", "iteration1_parallel.tsv"))
@@ -31,7 +31,7 @@ def main():
     )
     parser.add_argument(
         "--pretrained-model",
-        default="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_2-final",
+        default="/home/shrikant/2026/Summer Internship/Samarth/Prakrit_MT/models/eng_to_prakrit_v5-final",
         help="Path to pre-trained model weights to continue fine-tuning from",
     )
     parser.add_argument(
