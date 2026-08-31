@@ -26,6 +26,6 @@ fi
 
 echo "Start Time: $(date)"
 
-python run_bleu.py --hyp inferences/prakrit_to_english.baseline.txt --ref data/100_test_eng.txt
+python run_bleu.py --hyp inferences/prakrit_to_english.baseline1.txt --ref data/100_test_eng.txt
 
 echo "End Time: $(date)"
